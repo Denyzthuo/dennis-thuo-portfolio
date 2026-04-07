@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Dennis Thuo · Information Systems Portfolio</title>
+    <!-- Google Fonts & Modern CSS Reset -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 (free icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.5;
+            transition: background 0.25s ease, color 0.2s ease;
+            scroll-behavior: smooth;
+        }
+
+        /* LIGHT theme (default) */
+        :root {
+            --bg-primary: #f8fafc;
+            --bg-secondary: #ffffff;
+            --bg-card: #ffffff;
+            --bg-elevated: #f1f5f9;
+            --text-primary: #0f172a;
+            --text-secondary: #334155;
+            --text-muted: #475569;
+            --border-light: #e2e8f0;
+            --accent: #3b82f6;
+            --accent-dark: #2563eb;
+            --accent-soft: #dbeafe;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.03), 0 4px 12px rgba(0,0,0,0.05);
+            --shadow-md: 0 8px 20px rgba(0,0,0,0.05);
+            --code-bg: #f1f5f9;
+        }
+
+        /* DARK theme */
+        body.dark {
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-card: #1e293b;
+            --bg-elevated: #334155;
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --text-muted: #94a3b8;
+            --border-light: #334155;
+            --accent: #60a5fa;
+            --accent-dark: #3b82f6;
+            --accent-soft: #1e293b;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.3);
+            --shadow-md: 0 8px 20px rgba(0,0,0,0.4);
+            --code-bg: #0f172a;
+        }
+
+        /* Layout */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+            position: relative;
+        }
+
+        /* Theme Toggle Button - TOP RIGHT CORNER */
+        .theme-toggle {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-sm);
+            border-radius: 60px;
+            padding: 0.6rem 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 500;
+            cursor: pointer;
+            z-index: 1000;
+            transition: all 0.2s;
+            backdrop-filter: blur(4px);
+            color: var(--text-primary);
+        }
+        .theme-toggle i {
+            font-size: 1.1rem;
+        }
+        .theme-toggle:hover {
+            transform: scale(1.02);
+            background: var(--accent-soft);
+            border-color: var(--accent);
+        }
+
+        /* Header / Hero */
+        .hero {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 2.5rem;
+            margin-top: 1rem;
+            background: var(--bg-card);
+            border-radius: 2rem;
+            padding: 2rem;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-light);
+        }
+        .hero-info h1 {
+            font-size: 2.6rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, var(--accent), #8b5cf6);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+        .hero-info .badge {
+            background: var(--accent-soft);
+            padding: 0.25rem 0.9rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            display: inline-block;
+            margin-top: 0.5rem;
+            color: var(--accent-dark);
+        }
+        body.dark .hero-info .badge {
+            color: #90cdf4;
+        }
+        .contact-details {
+            margin-top: 1.2rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            font-size: 0.9rem;
+        }
+        .contact-details a, .contact-details span {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+        }
+        .contact-details a:hover {
+            color: var(--accent);
+        }
+        .hero-avatar {
+            background: var(--accent-soft);
+            width: 120px;
+            height: 120px;
+            border-radius: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            font-weight: 600;
+            color: var(--accent);
+            border: 2px solid var(--accent);
+        }
+
+        /* Section styles */
+        .section {
+            background: var(--bg-card);
+            border-radius: 1.5rem;
+            padding: 1.8rem 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-sm);
+            transition: all 0.2s;
+        }
+        .section-title {
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            border-left: 4px solid var(--accent);
+            padding-left: 1rem;
+        }
+        .section-title i {
+            color: var(--accent);
+            font-size: 1.4rem;
+        }
+        .grid-2cols {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        .skill-tag {
+            background: var(--bg-elevated);
+            padding: 0.4rem 1rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            display: inline-block;
+            margin: 0.2rem 0.3rem;
+        }
+        .education-item, .cert-item {
+            margin-bottom: 1rem;
+            border-bottom: 1px dashed var(--border-light);
+            padding-bottom: 0.8rem;
+        }
+        .education-item h3, .cert-item h3 {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        .date {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 0.2rem;
+        }
+
+        /* GitHub Profile Section - Clean Card */
+        .github-showcase {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            background: linear-gradient(135deg, var(--accent-soft) 0%, var(--bg-card) 100%);
+            border-radius: 1.2rem;
+            padding: 1.5rem 2rem;
+            border: 1px solid var(--border-light);
+        }
+        .github-showcase-text h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.4rem;
+        }
+        .github-showcase-text p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        .github-main-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            background: var(--accent);
+            color: white;
+            padding: 0.7rem 1.8rem;
+            border-radius: 60px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: 0.2s;
+            box-shadow: var(--shadow-sm);
+        }
+        .github-main-link i {
+            font-size: 1.2rem;
+        }
+        .github-main-link:hover {
+            background: var(--accent-dark);
+            transform: translateY(-2px);
+        }
+        .ref-item {
+            margin-bottom: 1rem;
+            padding: 0.5rem 0;
+        }
+        hr {
+            border-color: var(--border-light);
+            margin: 0.5rem 0;
+        }
+        footer {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            padding-bottom: 1rem;
+        }
+        @media (max-width: 700px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+            }
+            .section {
+                padding: 1.2rem;
+            }
+            .theme-toggle {
+                top: 1rem;
+                right: 1rem;
+                padding: 0.5rem 1rem;
+            }
+            .container {
+                padding-top: 3rem;
+            }
+            .github-showcase {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Theme Toggle Button - positioned top right corner -->
+        <div class="theme-toggle" id="themeToggleBtn">
+            <i class="fas fa-moon" id="themeIcon"></i>
+            <span id="themeText">Dark mode</span>
+        </div>
+
+        <!-- Hero Section -->
+        <div class="hero">
+            <div class="hero-info">
+                <h1>Dennis Ndiritu Thuo</h1>
+                <div class="badge">BSc Information Systems · Maseno University</div>
+                <div class="contact-details">
+                    <span><i class="fas fa-map-marker-alt"></i> Kisumu, Maseno, Kenya</span>
+                    <a href="tel:+254743508357"><i class="fas fa-phone-alt"></i> +254 743508357</a>
+                    <a href="mailto:denyzthuo@gmail.com"><i class="fas fa-envelope"></i> denyzthuo@gmail.com</a>
+                    <a href="https://github.com/denyzthuo" target="_blank" id="hero-github-link"><i class="fab fa-github"></i> GitHub</a>
+                </div>
+                <p style="margin-top: 1rem; color: var(--text-secondary); max-width: 550px;">
+                    Ambitious IT graduate specialized in Information Systems. Strong understanding of Networking Protocols, 
+                    device configuration, and operating systems. Eager to drive innovative solutions and collaborative success.
+                </p>
+            </div>
+            <div class="hero-avatar" style="overflow: hidden; padding: 0; border-width: 3px;">
+                <img src="profile.jpg" alt="Dennis Thuo" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+        </div>
+
+        <!-- Objective & Professional Mindset (replaces raw work experience) -->
+        <div class="section">
+            <div class="section-title">
+                <i class="fas fa-bullseye"></i> 
+                <span>Objective & Professional Mindset</span>
+            </div>
+            <p style="margin-bottom: 1rem; font-weight: 400;">As an ambitious Information Technology graduate, I am highly motivated to join a team where strong communication and a team-oriented mindset can contribute to challenging roles. I leverage expertise in Networking Protocols, operating systems, and device configuration to support organizational growth.</p>
+            <div class="grid-2cols" style="margin-top: 1rem;">
+                <div><i class="fas fa-check-circle" style="color: var(--accent);"></i> Efficient time management & deadline driven</div>
+                <div><i class="fas fa-check-circle" style="color: var(--accent);"></i> Team projects & collaborative mindset</div>
+                <div><i class="fas fa-check-circle" style="color: var(--accent);"></i> Continual improvement & passion for learning</div>
+                <div><i class="fas fa-check-circle" style="color: var(--accent);"></i> Strong interpersonal communication</div>
+            </div>
+        </div>
+
+        <!-- Education -->
+        <div class="section">
+            <div class="section-title">
+                <i class="fas fa-graduation-cap"></i>
+                <span>Education</span>
+            </div>
+            <div class="education-item">
+                <h3>📘 Bachelor of Science in Information Systems</h3>
+                <div>Maseno University · 2021 – 2025</div>
+                <div class="date">Focus: Networking, Information Systems Analysis, CyberOps fundamentals</div>
+            </div>
+            <div class="education-item">
+                <h3>🎓 Kenya Certificate of Secondary Education (KCSE)</h3>
+                <div>Githunguchu Secondary School · 2017 – 2020</div>
+            </div>
+            <div class="education-item">
+                <h3>🏫 Kenya Certificate of Primary Education</h3>
+                <div>Equator Primary School · 2009 – 2016</div>
+            </div>
+        </div>
+
+        <!-- Certifications -->
+        <div class="section">
+            <div class="section-title">
+                <i class="fas fa-certificate"></i>
+                <span>Certifications & Credentials</span>
+            </div>
+            <div class="grid-2cols">
+                <div class="cert-item">
+                    <i class="fab fa-cisco"></i> <strong>Introduction to Networks (CCNA)</strong><br>
+                    Completed: 24th June 2022
+                </div>
+                <div class="cert-item">
+                    <i class="fas fa-network-wired"></i> <strong>Switching, Routing, Wireless Essentials (CCNA)</strong><br>
+                    Completed: 28th August 2023
+                </div>
+                <div class="cert-item">
+                    <i class="fas fa-shield-alt"></i> <strong>CyberOps Associate</strong><br>
+                    Completed: 25th December 2023
+                </div>
+                <div class="cert-item">
+                    <i class="fas fa-user-secret"></i> <strong>Ethical Hacking</strong><br>
+                    Completed: 10th January 2025
+                </div>
+            </div>
+        </div>
+
+        <!-- Skills section -->
+        <div class="section">
+            <div class="section-title">
+                <i class="fas fa-cogs"></i>
+                <span>Core Competencies</span>
+            </div>
+            <div>
+                <span class="skill-tag">Problem Solving</span>
+                <span class="skill-tag">Communication Skills</span>
+                <span class="skill-tag">Technical Support</span>
+                <span class="skill-tag">Critical Thinking</span>
+                <span class="skill-tag">Team Collaboration</span>
+                <span class="skill-tag">Computer Networks</span>
+                <span class="skill-tag">Routing & Switching</span>
+                <span class="skill-tag">CyberOps Fundamentals</span>
+                <span class="skill-tag">Ethical Hacking</span>
+                <span class="skill-tag">Network Protocols (TCP/IP, DNS, DHCP)</span>
+                <span class="skill-tag">OS configuration (Windows/Linux)</span>
+                <span class="skill-tag">Information Systems Analysis</span>
+                <span class="skill-tag">Network Automation</span>
+                <span class="skill-tag">Security Analysis</span>
+            </div>
+        </div>
+
+        <!-- GITHUB PORTFOLIO SECTION - Central link to host the portfolio and projects -->
+        <div class="section" id="github-portfolio">
+            <div class="section-title">
+                <i class="fab fa-github"></i>
+                <span>GitHub Portfolio</span>
+            </div>
+            <div class="github-showcase">
+                <div class="github-showcase-text">
+                    <h3><i class="fab fa-github-alt"></i> Explore my code & projects</h3>
+                    <p>All my networking scripts, security tools, and open-source contributions live on GitHub.<br>
+                    This portfolio is hosted on GitHub Pages — visit my profile to see repositories, labs, and more.</p>
+                </div>
+                <a href="https://github.com/denyzthuo" class="github-main-link" target="_blank" id="main-github-btn">
+                    <i class="fab fa-github"></i> github.com/denyzthuo
+                </a>
+            </div>
+            <p style="margin-top: 1.2rem; font-size: 0.85rem; color: var(--text-muted); text-align: center;">
+                <i class="fas fa-code-branch"></i> Featured repositories: CCNA automation, CyberOps monitor, portfolio source & more.
+            </p>
+        </div>
+
+        <!-- Languages -->
+        <div class="section">
+            <div class="section-title">
+                <i class="fas fa-language"></i>
+                <span>Languages</span>
+            </div>
+            <div style="display: flex; gap: 2rem; flex-wrap: wrap;">
+                <div><strong>🇬🇧 English</strong> · Native / fluent</div>
+                <div><strong>🇰🇪 Swahili</strong> · Proficient</div>
+            </div>
+        </div>
+
+        <!-- References from CV -->
+        <div class="section">
+            <div class="section-title">
+                <i class="fas fa-address-card"></i>
+                <span>References</span>
+            </div>
+            <div class="grid-2cols">
+                <div class="ref-item">
+                    <strong>Mr. Moses Wainaina</strong><br>
+                    Lecturer, Department of Information Technology<br>
+                    Maseno University<br>
+                    <i class="fas fa-phone-alt"></i> 0707691430
+                </div>
+                <div class="ref-item">
+                    <strong>Gabriel Oliko</strong><br>
+                    Lecturer, Department of Information Technology<br>
+                    Maseno University<br>
+                    <i class="fas fa-phone-alt"></i> 0710401055<br>
+                    <i class="fas fa-envelope"></i> goliko@maseno.ac.ke
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <i class="fas fa-code"></i> Designed by Dennis Thuo
+        </footer>
+    </div>
+
+    <script>
+        (function() {
+            // Theme handling: dark/light toggle, placed at top right corner
+            const themeToggle = document.getElementById('themeToggleBtn');
+            const themeIcon = document.getElementById('themeIcon');
+            const themeText = document.getElementById('themeText');
+            
+            // Check localStorage or system preference
+            let currentTheme = localStorage.getItem('portfolio-theme');
+            if (!currentTheme) {
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                currentTheme = prefersDark ? 'dark' : 'light';
+            }
+            
+            function setTheme(theme) {
+                if (theme === 'dark') {
+                    document.body.classList.add('dark');
+                    themeIcon.className = 'fas fa-sun';
+                    themeText.innerText = 'Light mode';
+                } else {
+                    document.body.classList.remove('dark');
+                    themeIcon.className = 'fas fa-moon';
+                    themeText.innerText = 'Dark mode';
+                }
+                localStorage.setItem('portfolio-theme', theme);
+            }
+            
+            setTheme(currentTheme);
+            
+            themeToggle.addEventListener('click', () => {
+                let newTheme = document.body.classList.contains('dark') ? 'light' : 'dark';
+                setTheme(newTheme);
+            });
+            
+            // Ensure all GitHub links point to the main profile (denyzthuo)
+            const heroGithub = document.getElementById('hero-github-link');
+            const mainBtn = document.getElementById('main-github-btn');
+            const baseProfile = 'https://github.com/denyzthuo';
+            
+            if (heroGithub) heroGithub.href = baseProfile;
+            if (mainBtn) mainBtn.href = baseProfile;
+            
+            // Also any potential dynamic links inside the showcase
+            const allGitHubRefs = document.querySelectorAll('.github-main-link, .hero-info a[href*="github"]');
+            allGitHubRefs.forEach(link => {
+                if (link.getAttribute('href') && link.getAttribute('href').includes('denyzthuo')) {
+                    link.href = baseProfile;
+                }
+            });
+        })();
+    </script>
+    <!-- 
+        HOSTING INSTRUCTIONS FOR GITHUB:
+        1. Create a new repository named: dennis-thuo-portfolio (or your-username.github.io)
+        2. Upload this HTML file as index.html
+        3. Go to repository Settings → Pages → select branch (main) → Save
+        4. Your portfolio will be live at: https://YOUR_USERNAME.github.io/REPOSITORY_NAME/
+        To host directly as user page, name repo: YOUR_USERNAME.github.io
+        This portfolio includes all CV info, certifications, and a direct GitHub link.
+        The theme toggle is now positioned at top right corner, and "Featured Projects" section has been removed.
+        
+        UPDATES:
+        - Phone number changed to: +254 743508357
+        - Footer text changed to: "Designed by Dennis Thuo"
+    -->
+</body>
+</html>
